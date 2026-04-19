@@ -1,1 +1,155 @@
-# acai-app
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Açaí da Sandra</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f5ece7;
+    margin: 0;
+}
+
+header {
+    background: #2e0052;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.container {
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #2e0052;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #2e0052;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>🍧 Açaí da Sandra</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Cliente</h2>
+<input id="nome" placeholder="Nome">
+<input id="endereco" placeholder="Endereço ou retirada">
+</div>
+
+<div class="card">
+<h2>Tamanho</h2>
+<select id="tamanho" onchange="calcular()">
+<option value="11">300ml - R$11</option>
+<option value="14">400ml - R$14</option>
+<option value="18">500ml - R$18</option>
+<option value="22">700ml - R$22</option>
+</select>
+</div>
+
+<div class="card">
+<h2>Copos Puros</h2>
+
+<div class="item"><label><input type="checkbox" value="15" onchange="calcular()"> 300ml puro - R$15</label></div>
+<div class="item"><label><input type="checkbox" value="18" onchange="calcular()"> 400ml puro - R$18</label></div>
+<div class="item"><label><input type="checkbox" value="22" onchange="calcular()"> 500ml puro - R$22</label></div>
+<div class="item"><label><input type="checkbox" value="26" onchange="calcular()"> 700ml puro - R$26</label></div>
+
+</div>
+
+<div class="card">
+<h2>Adicionais</h2>
+
+<div class="item"><label><input type="checkbox" value="5" onchange="calcular()"> Morango +R$5</label></div>
+<div class="item"><label><input type="checkbox" value="2.5" onchange="calcular()"> Banana +R$2.5</label></div>
+<div class="item"><label><input type="checkbox" value="4" onchange="calcular()"> Uva +R$4</label></div>
+<div class="item"><label><input type="checkbox" value="4" onchange="calcular()"> Manga +R$4</label></div>
+<div class="item"><label><input type="checkbox" value="5" onchange="calcular()"> Kiwi +R$5</label></div>
+
+<div class="item"><label><input type="checkbox" value="6" onchange="calcular()"> Creme de Avelã +R$6</label></div>
+<div class="item"><label><input type="checkbox" value="4" onchange="calcular()"> Creme de Ninho +R$4</label></div>
+<div class="item"><label><input type="checkbox" value="2.5" onchange="calcular()"> Leite condensado +R$2.5</label></div>
+
+<div class="item"><label><input type="checkbox" value="2.5" onchange="calcular()"> Granola +R$2.5</label></div>
+<div class="item"><label><input type="checkbox" value="3" onchange="calcular()"> Chocolate +R$3</label></div>
+<div class="item"><label><input type="checkbox" value="3" onchange="calcular()"> Paçoca +R$3</label></div>
+<div class="item"><label><input type="checkbox" value="3.5" onchange="calcular()"> Leite em pó +R$3.5</label></div>
+<div class="item"><label><input type="checkbox" value="4" onchange="calcular()"> Bombom +R$4</label></div>
+
+</div>
+
+<div class="card total">
+Total: R$ <span id="total">0</span>
+</div>
+
+<button onclick="pedido()">Fazer Pedido</button>
+
+</div>
+
+<script>
+function calcular() {
+    let total = Number(document.getElementById("tamanho").value);
+
+    document.querySelectorAll("input[type=checkbox]:checked").forEach(el => {
+        total += Number(el.value);
+    });
+
+    document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function pedido() {
+    let nome = document.getElementById("nome").value;
+    let endereco = document.getElementById("endereco").value;
+    let total = document.getElementById("total").innerText;
+
+    let msg = "Pedido Açaí%0A";
+    msg += "Nome: " + nome + "%0A";
+    msg += "Endereço: " + endereco + "%0A";
+    msg += "Total: R$" + total;
+
+    window.open("https://wa.me/5554999277899?text=" + msg);
+}
+</script>
+
+</body>
+  </html>
